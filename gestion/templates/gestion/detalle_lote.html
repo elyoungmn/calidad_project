@@ -1,0 +1,45 @@
+{% extends 'gestion/base.html' %}
+
+{% block title %}Detalle del Lote {{ lote.id_lote }}{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Detalle del Lote {{ lote.id_lote }}</h5>
+        <a href="{% url 'descargar_zip' lote.id %}" class="btn btn-outline-light btn-sm">
+            <i class="bi bi-download"></i> Descargar ZIP
+        </a>
+    </div>
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Número de partes:</strong> {{ lote.numero_partes }}</li>
+            <li class="list-group-item"><strong>Fecha de registro:</strong> {{ lote.fecha_registro|date:"Y-m-d H:i" }}</li>
+            <li class="list-group-item">
+                <strong>Archivos:</strong>
+                <ul>
+                    {% if lote.analisis_espectrometrico %}
+                    <li><a href="{{ lote.analisis_espectrometrico.url }}" download>📄 Análisis espectrométrico</a></li>
+                    {% endif %}
+                    {% if lote.tolerancia_geometrica %}
+                    <li><a href="{{ lote.tolerancia_geometrica.url }}" download>📄 Tolerancia geométrica</a></li>
+                    {% endif %}
+                    {% if lote.prueba_dureza_tension %}
+                    <li><a href="{{ lote.prueba_dureza_tension.url }}" download>📄 Prueba de dureza y tensión</a></li>
+                    {% endif %}
+                    {% if lote.evidencia_fotografica %}
+                    <li><a href="{{ lote.evidencia_fotografica.url }}" download>🖼️ Evidencia fotográfica</a></li>
+                    {% endif %}
+                    {% if lote.plano_original %}
+                    <li><a href="{{ lote.plano_original.url }}" download>📐 Plano original</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+        </ul>
+        <div class="mt-4">
+            <a href="{% url 'ver_lotes' %}" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Volver a la lista
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

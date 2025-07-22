@@ -1,0 +1,55 @@
+# Entornos virtuales
+venv/
+env/
+ENV/
+.VENV/
+
+# Archivos de Python compilados
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos de log y bases de datos
+*.log
+*.sqlite3
+*.db
+
+# Archivos temporales
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Archivos de configuración sensibles
+.env
+.env.*
+
+# Archivos de migraciones opcionales (si deseas ignorarlos)
+# gestion/migrations/
+# */migrations/
+
+# Archivos de Django que se pueden regenerar
+staticfiles/
+media/
+
+# Archivos de test o cobertura
+htmlcov/
+.coverage
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# Configuración del editor (VSCode, PyCharm, etc.)
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos ZIP generados
+*.zip

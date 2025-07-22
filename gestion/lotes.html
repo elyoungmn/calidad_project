@@ -1,0 +1,24 @@
+{% extends 'gestion/base.html' %}
+{% block title %}Lotes Registrados{% endblock %}
+
+{% block content %}
+<h1>Lotes Registrados</h1>
+<table>
+    <tr>
+        <th>ID Lote</th>
+        <th>Archivos</th>
+    </tr>
+    {% for lote in lotes %}
+    <tr>
+        <td>{{ lote.id_lote }}</td>
+        <td>
+            <a href="{{ lote.analisis_espectrometrico.url }}">Análisis</a> |
+            <a href="{{ lote.tolerancia_geometrica.url }}">Tolerancia</a> |
+            <a href="{{ lote.numero_partes.url }}">Partes</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<p><a href="{% url 'registrar_lote' %}">Ir al registro de lote</a></p>
+{% endblock %}

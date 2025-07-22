@@ -1,0 +1,24 @@
+{% extends 'gestion/base.html' %}
+{% block title %}Registrar Lote{% endblock %}
+
+{% block content %}
+<h1>Registrar Nuevo Lote</h1>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="id_lote">ID del Lote:</label>
+    {{ form.id_lote }}
+
+    <label for="analisis_espectrometrico">Análisis Espectrométrico:</label>
+    {{ form.analisis_espectrometrico }}
+
+    <label for="tolerancia_geometrica">Tolerancia Geométrica:</label>
+    {{ form.tolerancia_geometrica }}
+
+    <label for="numero_partes">Número de Partes:</label>
+    {{ form.numero_partes }}
+
+    <button type="submit">Guardar Lote</button>
+</form>
+
+<p style="margin-top:20px;"><a href="{% url 'ver_lotes' %}">Ver lotes registrados</a></p>
+{% endblock %}

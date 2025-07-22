@@ -1,0 +1,8 @@
+<!-- templates/registration/logged_out.html -->
+{% extends "gestion/base.html" %}
+{% block content %}
+<div class="container text-center mt-5">
+    <h3>Sesión cerrada correctamente</h3>
+    <a href="{% url 'login' %}" class="btn btn-primary mt-3">Iniciar sesión nuevamente</a>
+</div>
+{% endblock %}

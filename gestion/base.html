@@ -1,0 +1,43 @@
+{% extends "gestion/base.html" %}
+{% block content %}
+<div class="container py-5">
+  <h2 class="text-center mb-4">Lotes Registrados</h2>
+  {% if lotes %}
+    <div class="table-responsive">
+      <table class="table table-striped table-hover align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Análisis</th>
+            <th>Tolerancia</th>
+            <th>Partes</th>
+            <th>Fotografía</th>
+            <th>Plano</th>
+            <th>Dureza/Tensión</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for lote in lotes %}
+          <tr>
+            <td>{{ lote.id_lote }}</td>
+            <td>{{ lote.fecha_registro }}</td>
+            <td><a href="{{ lote.analisis_espectrometrico.url }}" target="_blank">Ver</a></td>
+            <td><a href="{{ lote.tolerancia_geometrica.url }}" target="_blank">Ver</a></td>
+            <td><a href="{{ lote.numero_partes.url }}" target="_blank">Ver</a></td>
+            <td><a href="{{ lote.evidencia_fotografica.url }}" target="_blank">Ver</a></td>
+            <td><a href="{{ lote.plano_original.url }}" target="_blank">Ver</a></td>
+            <td><a href="{{ lote.pruebas_dureza_tension.url }}" target="_blank">Ver</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="text-center">No hay lotes registrados.</p>
+  {% endif %}
+  <div class="text-center mt-4">
+    <a href="{% url 'registrar_lote' %}" class="btn btn-primary">Registrar nuevo lote</a>
+  </div>
+</div>
+{% endblock %}
