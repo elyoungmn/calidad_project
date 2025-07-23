@@ -1,3 +1,4 @@
+gunicorn
 absl-py==2.3.1
 asgiref==3.8.1
 asyncio==3.4.3
@@ -27,6 +28,7 @@ fpdf==1.7.2
 fpdf2==2.8.3
 fsspec==2025.5.1
 greenlet==3.2.3
+gunicorn==23.0.0
 h11==0.16.0
 h5py==3.14.0
 humanfriendly==10.0
