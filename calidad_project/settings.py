@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 SECRET_KEY = 'django-insecure-reemplaza-esto-con-tu-clave'
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # APPS
 INSTALLED_APPS = [
@@ -103,6 +103,12 @@ LOGOUT_REDIRECT_URL = 'login'
 
 AUTH_USER_MODEL = 'gestion.Usuario'
 
+if os.environ.get('RENDER'):
+    DEBUG = False
+    ALLOWED_HOSTS = ['tu-nombre-del-servicio.onrender.com']
+
+# Asegúrate de tener configurado el uso de archivos estáticos
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # CUSTOM USER MODEL (opcional, si lo tienes implementado)
 # AUTH_USER_MODEL = 'gestion.UsuarioPersonalizado'
