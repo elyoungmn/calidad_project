@@ -7,9 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 SECRET_KEY = 'django-insecure-reemplaza-esto-con-tu-clave'
 DEBUG = True
-ALLOWED_HOSTS = ['https://calidad-project.onrender.com',
-                 'localhost',
-                 '127.0.0.1',]
+ALLOWED_HOSTS = ['calidad-project.onrender.com', 'localhost', '127.0.0.1']
 
 # APPS
 INSTALLED_APPS = [
@@ -67,18 +65,10 @@ DATABASES = {
 
 # PASSWORD VALIDATORS
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 # LANGUAGE / TIME
@@ -88,8 +78,10 @@ USE_I18N = True
 USE_TZ = True
 
 # STATIC FILES
-STATIC_URL = 'static/'
-#STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# Descomenta esta línea si tienes una carpeta static para desarrollo:
+# STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # MEDIA FILES
 MEDIA_URL = '/media/'
@@ -103,14 +95,11 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'ver_lotes'
 LOGOUT_REDIRECT_URL = 'login'
 
+# Custom user model
 AUTH_USER_MODEL = 'gestion.Usuario'
 
+# Configuración específica para Render
 if os.environ.get('RENDER'):
     DEBUG = False
-    ALLOWED_HOSTS = ['tu-nombre-del-servicio.onrender.com']
-
-# Asegúrate de tener configurado el uso de archivos estáticos
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-# CUSTOM USER MODEL (opcional, si lo tienes implementado)
-# AUTH_USER_MODEL = 'gestion.UsuarioPersonalizado'
+    ALLOWED_HOSTS = ['calidad-project.onrender.com']
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
