@@ -7,7 +7,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 SECRET_KEY = 'django-insecure-reemplaza-esto-con-tu-clave'
 DEBUG = True
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://calidad-project.onrender.com',
+                 'localhost',
+                 '127.0.0.1',]
 
 # APPS
 INSTALLED_APPS = [
