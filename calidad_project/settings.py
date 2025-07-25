@@ -120,4 +120,4 @@ LOGGING = {
 }
 
 # STATIC FILES STORAGE FOR PRODUCTION
-django_heroku.settings(locals())
+
