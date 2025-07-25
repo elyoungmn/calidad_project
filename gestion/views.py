@@ -69,11 +69,11 @@ def descargar_zip(request, lote_id):
 
 def registro_usuario(request):
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('registrar_lote')
+            return redirect('ver_lotes')  # O la página a la que deseas redirigir después del registro
     else:
-        form = CustomUserCreationForm()
+        form = UserCreationForm()
     return render(request, 'gestion/registro.html', {'form': form})

@@ -6,10 +6,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY
 SECRET_KEY = 'django-insecure-reemplaza-esto-con-tu-clave'
-DEBUG = True
+DEBUG = False  # Cambiar a False para producción
 ALLOWED_HOSTS = ['calidad-project.onrender.com', 'localhost', '127.0.0.1']
 
-# APPS
+# INSTALLED APPS
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -17,8 +17,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'gestion',
-    'widget_tweaks',
+    'gestion',  # Asegúrate de incluir tu aplicación
+    'widget_tweaks',  # Si usas widget_tweaks en formularios
 ]
 
 # MIDDLEWARE
@@ -32,14 +32,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# ROOT URL
+# ROOT URL CONF
 ROOT_URLCONF = 'calidad_project.urls'
 
 # TEMPLATES
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'gestion' / 'templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -52,54 +52,72 @@ TEMPLATES = [
     },
 ]
 
-# WSGI
+# WSGI APPLICATION
 WSGI_APPLICATION = 'calidad_project.wsgi.application'
 
-# DATABASE
+# DATABASE CONFIGURATION
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', 'nombre_de_base_de_datos'),
+        'USER': os.environ.get('DB_USER', 'usuario'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'contraseña'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
 
-# PASSWORD VALIDATORS
-AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+# AUTHENTICATION BACKENDS
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
-# LANGUAGE / TIME
-LANGUAGE_CODE = 'es-mx'
-TIME_ZONE = 'America/Mexico_City'
-USE_I18N = True
-USE_TZ = True
+# LOGIN URL
+LOGIN_URL = 'login'
 
-# STATIC FILES
+# STATIC FILES (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# Descomenta esta línea si tienes una carpeta static para desarrollo:
-# STATICFILES_DIRS = [BASE_DIR / 'static']
+STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# MEDIA FILES
+# MEDIA FILES (Images, Uploads)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# DEFAULT PRIMARY KEY FIELD
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# SECURITY SETTINGS
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+SECURE_HSTS_SECONDS = 3600
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
 
-# LOGIN / LOGOUT
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'ver_lotes'
-LOGOUT_REDIRECT_URL = 'login'
+# EMAIL SETTINGS (Si usas correo en producción)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'tu_correo@gmail.com'
+EMAIL_HOST_PASSWORD = 'tu_contraseña_de_correo'
 
-# Custom user model
-AUTH_USER_MODEL = 'gestion.Usuario'
+# LOGGING CONFIGURATION
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'ERROR',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    },
+}
 
-# Configuración específica para Render
-if os.environ.get('RENDER'):
-    DEBUG = False
-    ALLOWED_HOSTS = ['calidad-project.onrender.com']
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# STATIC FILES STORAGE FOR PRODUCTION
+django_heroku.settings(locals())
