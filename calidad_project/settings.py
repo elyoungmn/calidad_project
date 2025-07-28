@@ -4,6 +4,12 @@ from pathlib import Path
 # BASE DIR
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+import os
+from pathlib import Path
+
+# BASE DIR
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 # SECURITY
 SECRET_KEY = 'django-insecure-reemplaza-esto-con-tu-clave'
 DEBUG = False  # Cambiar a False para producción
@@ -92,7 +98,7 @@ SECURE_HSTS_SECONDS = 3600
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 
-# EMAIL SETTINGS (Si usas correo en producción)
+# EMAIL SETTINGS
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -118,6 +124,3 @@ LOGGING = {
         },
     },
 }
-
-# STATIC FILES STORAGE FOR PRODUCTION
-

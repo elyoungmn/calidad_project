@@ -1,47 +1,6 @@
-{% extends 'gestion/base.html' %}
-
-{% block title %}Lista de Lotes{% endblock %}
+{% extends "base_generic.html" %}
 
 {% block content %}
-<div class="card shadow-sm">
-    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Lotes registrados</h5>
-        <a href="{% url 'registrar_lote' %}" class="btn btn-success btn-sm">
-            <i class="bi bi-plus-circle"></i> Nuevo Lote
-        </a>
-    </div>
-    <div class="card-body">
-        {% if lotes %}
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover align-middle">
-                <thead class="table-dark text-center">
-                    <tr>
-                        <th>ID Lote</th>
-                        <th>Fecha de Registro</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for lote in lotes %}
-                    <tr>
-                        <td class="text-center">{{ lote.id_lote }}</td>
-                        <td class="text-center">{{ lote.fecha_registro|date:"Y-m-d H:i" }}</td>
-                        <td class="text-center">
-                            <a href="{% url 'detalle_lote' lote.id %}" class="btn btn-primary btn-sm">
-                                <i class="bi bi-eye"></i> Ver
-                            </a>
-                            <a href="{% url 'descargar_zip' lote.id %}" class="btn btn-outline-secondary btn-sm">
-                                <i class="bi bi-file-zip"></i> ZIP
-                            </a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        {% else %}
-        <p class="text-muted">No hay lotes registrados.</p>
-        {% endif %}
-    </div>
-</div>
+    <h2>Ver Lotes</h2>
+    <!-- Lista de lotes -->
 {% endblock %}

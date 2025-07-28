@@ -1,61 +1,10 @@
-{% extends 'gestion/base.html' %}
-{% load widget_tweaks %}
-
-
-{% block title %}Registrar Lote{% endblock %}
+{% extends "base_generic.html" %}
 
 {% block content %}
-<div class="container mt-5">
-    <h2 class="mb-4">Registrar Lote</h2>
-    <div class="card shadow">
-        <div class="card-body">
-            <form method="post" enctype="multipart/form-data" novalidate>
-                {% csrf_token %}
-                <div class="mb-3">
-                    <label for="id_id_lote" class="form-label">ID del Lote</label>
-                    {{ form.id_lote }}
-                </div>
-
-                <div class="mb-3">
-                    <label for="id_numero_partes" class="form-label">Número de Partes</label>
-                    {{ form.numero_partes }}
-                </div>
-
-                <div class="mb-3">
-                    <label for="id_analisis_espectrometrico" class="form-label">Análisis Espectrométrico</label>
-                    {{ form.analisis_espectrometrico }}
-                </div>
-
-                <div class="mb-3">
-                    <label for="id_tolerancia_geometrica" class="form-label">Tolerancia Geométrica</label>
-                    {{ form.tolerancia_geometrica }}
-                </div>
-
-                <div class="mb-3">
-                    <label for="id_prueba_dureza_tension" class="form-label">Prueba de Dureza y Tensión</label>
-                    {{ form.prueba_dureza_tension }}
-                </div>
-
-                <div class="mb-3">
-                    <label for="id_evidencia_fotografica" class="form-label">Evidencia Fotográfica</label>
-                    {{ form.evidencia_fotografica }}
-                </div>
-
-                <div class="mb-3">
-                    <label for="id_plano_original" class="form-label">Plano Original</label>
-                    {{ form.plano_original }}
-                </div>
-
-                <div class="mt-4 d-flex justify-content-between">
-                    <button type="submit" class="btn btn-success">
-                        <i class="bi bi-save"></i> Guardar Lote
-                    </button>
-                    <a href="{% url 'ver_lotes' %}" class="btn btn-secondary">
-                        <i class="bi bi-arrow-left"></i> Cancelar
-                    </a>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+    <h2>Registrar Lote</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <!-- Campos del formulario de lote -->
+        <button type="submit">Registrar Lote</button>
+    </form>
 {% endblock %}
